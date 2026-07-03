@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 
 app.get('/', (req, res) => {
-  res.send("Hello Kubernetes");
+  res.send("Hello from CICD-Pipeline-Kubernetes");
 });
 
 app.listen(3000, "0.0.0.0", () => {
