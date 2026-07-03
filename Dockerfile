@@ -7,4 +7,4 @@ COPY myapp/. .
 FROM node:18-slim
 WORKDIR /app
 COPY --from=builder /app .
-CMD ["node", "myapp/app.js"]
+CMD ["node", "app.js"]
