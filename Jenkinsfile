@@ -32,21 +32,21 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    sh 'docker build -t myappp:${IMAGE_TAG} .'
+                    sh 'docker build -t myapp:1.0.${IMAGE_TAG} .'
                 }
             }
         }
 
         stage('Load Image into Kind') {
             steps {
-                sh 'kind load docker-image myapp:${IMAGE_TAG} --name dev-cluster'
+                sh 'kind load docker-image myapp:1.0.${IMAGE_TAG} --name dev-cluster'
             }
         }
 
         stage('Deploy to Kubernetes') {
             steps {
                 //sh 'kubectl apply -f k8s/deployment.yaml'
-                sh 'kubectl set image deployment/myapp myapp=myapp:${IMAGE_TAG}'
+                sh 'kubectl set image deployment/myapp myapp=myapp:1.0.${IMAGE_TAG}'
                 sh 'kubectl apply -f k8s/service.yaml'
                 sh 'kubectl apply -f k8s/ingress.yaml'
             }
