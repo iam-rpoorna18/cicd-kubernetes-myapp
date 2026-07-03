@@ -4,7 +4,7 @@ pipeline {
     //{ label 'host' }
 
     environment {
-        IMAGE = "myapp:latest"
+        IMAGE = "${BUILD_NUMBER}"
     }
 
     stages {
@@ -45,7 +45,8 @@ pipeline {
 
         stage('Deploy to Kubernetes') {
             steps {
-                sh 'kubectl apply -f k8s/deployment.yaml'
+                //sh 'kubectl apply -f k8s/deployment.yaml'
+                sh 'kubectl set image deployment/myapp myapp=myapp:$IMAGE'
                 sh 'kubectl apply -f k8s/service.yaml'
                 sh 'kubectl apply -f k8s/ingress.yaml'
             }
