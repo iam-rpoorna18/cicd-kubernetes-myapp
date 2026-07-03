@@ -1,5 +1,7 @@
 pipeline {
-    agent { label 'host' }
+    agent any
+    
+    //{ label 'host' }
 
     environment {
         IMAGE = "myapp:latest"
