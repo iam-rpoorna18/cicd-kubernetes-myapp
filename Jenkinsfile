@@ -36,13 +36,19 @@ pipeline {
                 }
             }
         }
+        stage('Trivy Security SCAN') {
+            steps {
+                script {
+                    sh 'trivy image --severity HIGH,CRITICAL,MEDIUM myapp:1.0.${IMAGE_TAG} .'
+                }
+            }
+        }
 
         stage('Load Image into Kind') {
             steps {
                 sh 'kind load docker-image myapp:1.0.${IMAGE_TAG} --name dev-cluster'
             }
         }
-
         stage('Deploy to Kubernetes') {
             steps {
                 sh 'kubectl apply -f k8s/deployment.yaml'
