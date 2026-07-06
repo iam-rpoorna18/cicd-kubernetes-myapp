@@ -39,7 +39,7 @@ pipeline {
         stage('Trivy Security SCAN') {
             steps {
                 script {
-                    sh 'trivy image --severity HIGH,CRITICAL,MEDIUM myapp:1.0.${IMAGE_TAG} .'
+                    sh 'trivy image --severity HIGH,CRITICAL,MEDIUM myapp:1.0.${IMAGE_TAG}'
                 }
             }
         }
